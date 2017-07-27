@@ -20,5 +20,6 @@ console.log('start web server at ', port, '...')
 
 app.get('/', function(req, res){
 	console.log('get')
-	res.send('hello world.')
+	// res.send('hello world.')
+	res.render('index')
 })
