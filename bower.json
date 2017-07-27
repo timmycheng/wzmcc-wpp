@@ -1,0 +1,26 @@
+{
+  "name": "wzmcc-wpp",
+  "description": "wzmcc workings & projects plan",
+  "main": "app.js",
+  "authors": [
+    "timmycheng"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "node",
+    "express",
+    "mongo"
+  ],
+  "homepage": "https://github.com/timmycheng/wzmcc-wpp",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/libs",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.7"
+  }
+}
