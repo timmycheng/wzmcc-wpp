@@ -1,0 +1,28 @@
+{
+  "name": "wzmcc-wpp",
+  "version": "1.0.0",
+  "description": "wzmcc workings & projects plan",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/timmycheng/wzmcc-wpp.git"
+  },
+  "keywords": [
+    "node",
+    "express",
+    "mongo"
+  ],
+  "author": "timmycheng",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/timmycheng/wzmcc-wpp/issues"
+  },
+  "homepage": "https://github.com/timmycheng/wzmcc-wpp#readme",
+  "dependencies": {
+    "express": "^4.15.3",
+    "jade": "^1.11.0"
+  }
+}
