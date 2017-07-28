@@ -23,6 +23,6 @@
   "dependencies": {
     "bootstrap": "^3.3.7",
     "fullcalendar": "^3.4.0",
-    "datetimepicker": "^2.5.4"
+    "bootstrap-datetimepicker": "^0.0.11"
   }
 }
