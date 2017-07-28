@@ -12,6 +12,10 @@ block content
                     .col-sm-10
                         input#inputName.form-control(type="text",name="project[name]",value=project.name)
                 .form-group
+                    label.col-sm-2.control-label(for="inputDeadline") 截止日期
+                    .col-sm-10
+                        input#inputDeadline.form-control(type="text", name="project[deadline]", value=project.deadline)
+                .form-group
                     label.col-sm-2.control-label(for="inputDescription") 项目说明
                     .col-sm-10
                         input#inputDescription.form-control(type="text",name="project[description]",value=project.description)
@@ -19,3 +23,4 @@ block content
                     .col-sm-offset-2.col-sm-10
                     button.btn.btn-default(type="submit") 录入
                 hr
+    script(src='/js/project.js')
