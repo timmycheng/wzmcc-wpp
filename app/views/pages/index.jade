@@ -1,5 +1,47 @@
 extends ../layout
 block content
     .container
-        h3 #{title}
+        //- #calendar
+        table.table.table-hover.table-bordered
+            thead
+                tr
+                    //- th 编号
+                    th 状态
+                    th 描述
+                    th 截止
+                    th 内容
+                    th 责任人
+                    //- th 查看
+                    th 操作
+                tbody
+                    each item in projects
+                        if item.status != 'close'
+                            tr(class='item-id-#{item._id}')
+                                //- td #{item._id}
+                                td #{item.status}
+                                td #{item.name}
+                                td #{moment(item.deadline).format('MM/DD/YYYY')}
+                                td #{item.description}
+                                td #{item.responser.nickname}
+                                //- td: a(target='_blank', href='/project/#{item._id}') 查看
+                                td
+                                    button.btn.btn-primary(type='button', data-id='#{item.id}') 查看
+                                    button.btn.btn-danger.del(type='button', data-id='#{item.id}') 删除
+                        else
+                            tr(class='item-id-#{item._id} success')
+                                //- td #{item._id}
+                                td #{item.status}
+                                td #{item.name}
+                                td #{item.deadline}
+                                td #{item.description}
+                                td #{item.responser.nickname}
+                                //- td: a(target='_blank', href='/project/#{item._id}') 查看
+                                td
+                                    button.btn.btn-primary(type='button', data-id='#{item.id}') 查看
+                                    button.btn.btn-danger.del(type='button', data-id="#{item.id}") 删除
+
+    hr
+
+    script(src="/js/index.js")
+                    
         
