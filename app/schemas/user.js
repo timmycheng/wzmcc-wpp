@@ -3,28 +3,28 @@ var bcrypt = require('bcrypt-nodejs')
 var SALT_WORK_FACTOR = 10
 var UserSchema = new mongoose.Schema({
 	username: {
-		unique:true,
-		type:String
+		unique: true,
+		type: String
 	},
 	nickname: String,
 	password: String,
 	role: {
-		type:Number,
-		default:50
+		type: Number,
+		default: 50
 	},
 	meta: {
 		createAt: {
-			type:Date,
-			default:Date.now()
+			type: Date,
+			default: Date.now()
 		},
 		updateAt: {
-			type:Date,
-			default:Date.now()
+			type: Date,
+			default: Date.now()
 		}
 	}
 })
 
-UserSchema.pre('save',function(next){
+UserSchema.pre('save', function(next){
 	var user = this
 	if(this.isNew){
 		this.meta.createAt = this.meta.updateAt = Date.now()
@@ -32,10 +32,10 @@ UserSchema.pre('save',function(next){
 	else{
 		this.meta.updateAt = Date.now()
 	}
-	bcrypt.genSalt(SALT_WORK_FACTOR,function(err,salt){
+	bcrypt.genSalt(SALT_WORK_FACTOR, function(err, salt){
 		if(err) return next(err)
 
-			bcrypt.hash(user.password,salt,null,function(err,hash){
+			bcrypt.hash(user.password,salt, null, function(err, hash){
 				if(err) return next(err)
 
 					user.password = hash
@@ -45,13 +45,13 @@ UserSchema.pre('save',function(next){
 
 	//next()
 })
-UserSchema.methods ={
-	comparePassword:function(_password,cb){
+UserSchema.methods = {
+	comparePassword:function(_password, cb){
 		var password = this.password
-		bcrypt.compare(_password,password,function(err,isMatch){
+		bcrypt.compare(_password, password, function(err, isMatch){
 			if(err) return cb(err)
 
-			cb(null,isMatch)
+			cb(null, isMatch)
 		})
 	}
 }
@@ -63,7 +63,7 @@ UserSchema.statics = {
 			.sort('meta.updateAt')
 			.exec(cb)
 	},
-	findById:function(id,cb){
+	findById:function(id, cb){
 		return this
 			.findOne({_id:id})
 			.exec(cb)

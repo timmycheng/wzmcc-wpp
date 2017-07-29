@@ -3,4 +3,7 @@ $(function(){
     $('#inputDeadline').flatpickr({
         "locale": "zh",
     })
+    $('#inputStart').flatpickr({
+        "locale": "zh",
+    })
 })

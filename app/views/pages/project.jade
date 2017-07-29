@@ -12,6 +12,10 @@ block content
                     .col-sm-10
                         input#inputName.form-control(type="text",name="project[name]",value=project.name)
                 .form-group
+                    label.col-sm-2.control-label(for="inputStart") 开始日期
+                    .col-sm-10
+                        input#inputStart.form-control(type="text", name="project[start]", value=project.start)
+                .form-group
                     label.col-sm-2.control-label(for="inputDeadline") 截止日期
                     .col-sm-10
                         input#inputDeadline.form-control(type="text", name="project[deadline]", value=project.deadline)

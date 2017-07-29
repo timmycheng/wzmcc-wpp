@@ -15,7 +15,7 @@ exports.signup = function(req,res){
 			return res.redirect('/signin')//已注册的用户在注册时候重定向到登录页面
 		}else{
 			var user  = new User(_user)
-
+			console.log(user)
 			user.save(function(err,user){
 				if(err){
 					console.log(err)

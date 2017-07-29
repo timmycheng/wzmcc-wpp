@@ -2,10 +2,15 @@ var mongoose = require('mongoose')
 var Schema = mongoose.Schema
 var ObjectId = Schema.Types.ObjectId
 var ProjectSchema = new Schema({
+	pid: String,
 	name: String,
 	status: {
-		type: String,
-		default: 'open',
+		type: Number,
+		default: 0,
+	},
+	start: {
+		type: Date,
+		default: Date.now(),
 	},
 	deadline: {
         type: Date,
@@ -29,6 +34,8 @@ var ProjectSchema = new Schema({
 })
 
 ProjectSchema.pre('save',function(next){
+	// var weekNumber = moment(this.meta.createAt).format('WW')
+	// this.week = moment(this.meta.createAt).format('ww')
 	if(this.isNew){
 		this.meta.createAt = this.meta.updateAt = Date.now()
 	}
