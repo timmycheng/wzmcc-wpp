@@ -5,8 +5,10 @@
 .navbar.navbar-default.navbar-fixed-bottom
     .container
         .navbar-header
-            a.navbar-brand(href="/") wzmcc-wpp
+            a.navbar-brand(href="/") WZMCC－WPP
         if user
+            p.navbar-text.navar-left
+                a.navbar-link(href="/user/project/new") 新建项目
             p.navbar-text.navbar-right
                 span 欢迎您，#{user.nickname}
                 span &nbsp;|&nbsp;

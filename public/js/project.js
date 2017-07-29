@@ -1,3 +1,6 @@
 $(function(){
-    $('#inputDeadline').datetimepicker()
+    // alert('in')
+    $('#inputDeadline').flatpickr({
+        "locale": "zh",
+    })
 })
