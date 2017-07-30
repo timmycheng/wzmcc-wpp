@@ -15,7 +15,7 @@ exports.new = function(req, res){
     })
 }
 
-exports.save = function(req, res){
+exports.saveAndUpdate = function(req, res){
     var id = req.body.project._id
     var projectObj = req.body.project
     var _project, _week
@@ -25,28 +25,101 @@ exports.save = function(req, res){
     // _week = new Week()
     
     // console.log(_project)
-    Week.findOneAndUpdate(
-        {weeknumber: w}, 
-        {$inc: {count: 1}}, 
-        {upsert: true}, 
-        function(err, week){
+    if(id){
+        // console.log(projectObj)
+        console.log('update')
+        Project.findById(id, function(err, project){
             if(err){
                 console.log(err)
             }
-            // console.log(week)
-            // projectObj.week = week.count
-            if(week){
-                projectObj.pid = week.weeknumber + '-' + (week.count + 1)
-            }else{
-                projectObj.pid = w + '-1'
-            }
-            // console.log(projectObj)
-            _project = new Project(projectObj)
+            _project = _.extend(project, projectObj)
             _project.save(function(err, project){
                 if(err){
                     console.log(err)
                 }
                 res.redirect('/')
             })
-    })
+        })
+    }else{
+        console.log('save')
+        Week.findOneAndUpdate(
+            {weeknumber: w}, 
+            {$inc: {count: 1}}, 
+            {upsert: true}, 
+            function(err, week){
+                if(err){
+                    console.log(err)
+                }
+                // console.log(week)
+                // projectObj.week = week.count
+                if(week){
+                    projectObj.pid = week.weeknumber + '-' + (week.count + 1)
+                }else{
+                    projectObj.pid = w + '-1'
+                }
+                // console.log(projectObj)
+                _project = new Project(projectObj)
+                _project.save(function(err, project){
+                    if(err){
+                        console.log(err)
+                    }
+                    res.redirect('/')
+                })
+        })
+    }
+
+}
+
+exports.del = function(req, res){
+    var id = req.query.id
+    var week = req.query.week
+    console.log(id)
+    if (id) {
+        Project.remove({_id: id}, function(err){
+            if(err){
+                console.log(err)
+            }else{
+                Week.findOneAndUpdate(
+                    {weeknumber: week},
+                    {$inc: {count: -1}},
+                    function(err){
+                        if(err){
+                            console.log(err)
+                        }
+                        res.json({success: 1})
+                    }
+                )
+            }
+        })
+    }
+}
+
+exports.list = function(req, res, next){
+    Project
+        .find({})
+        .populate('responser', 'nickname')
+        .exec(function(err, projects){
+            if(err){
+                console.log(err)
+            }
+            req.projects = projects
+            next()
+        })
+}
+
+exports.detail = function(req, res){
+    var id = req.params.id
+    console.log(id)
+    if(id) {
+        Project
+            .findById({_id: id}, function(err, project){
+                if(err){
+                    console.log(err)
+                }
+                res.render('project', {
+                    title: project.name,
+                    project: project,
+                })
+            })
+    }
 }

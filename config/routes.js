@@ -2,7 +2,7 @@ var Index = require('../app/controllers/index')
 var User = require('../app/controllers/user')
 var Project = require('../app/controllers/project')
 
-
+// var moment = require('moment')
 // routes
 /*
 index
@@ -12,13 +12,22 @@ comment
 */
 
 module.exports = function(app){
+    // session
     app.use(function(req, res, next){
         var _user = req.session.user
         app.locals.user = _user
         next()
     })
 
-    app.get('/', Index.index)
+    // debug
+    app.use(function(req, res, next){
+        var date = app.locals.moment(Date.now()).format('hh:mm:ss')
+        console.log(date, req.method, req.originalUrl)
+        next()
+    })
+
+    // app.get('/', Index.index)
+    app.get('/', Project.list, Index.newInd)
 
     app.post('/user/signup', User.signup)
 	app.post('/user/signin', User.signin)
@@ -28,8 +37,9 @@ module.exports = function(app){
     app.get('/admin/user/list', User.signinRequired ,User.adminRequired ,User.list)
     
     app.get('/user/project/new', User.signinRequired, Project.new)
-    app.get('/user/project/:id', User.signinRequired, Project.new)
-    app.post('/user/project', User.signinRequired, Project.save)
+    app.get('/user/project/:id', User.signinRequired, Project.detail)
+    app.post('/user/project', User.signinRequired, Project.saveAndUpdate)
+    app.delete('/user/project',User.signinRequired, Project.del)
     
 
 }

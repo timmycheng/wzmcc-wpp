@@ -25,13 +25,13 @@ app.use(cookieParser())
 app.use(require('connect-multiparty')())
 
 app.use(session({
-	secret:'wzmcc',
+	secret: 'wzmcc',
 	store:new mongoStore({
-		url:mongoUrl,
-		collection:'sessions'
+		url: mongoUrl,
+		collection: 'sessions'
 	}),
-	resave:false,
-    saveUninitialized:true
+	resave: false,
+    saveUninitialized: true
 }))
 
 app.use(bodyParser.urlencoded({

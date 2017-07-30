@@ -2,7 +2,7 @@ extends ../layout
 block content
     .container
         //- #calendar
-        table#indexTable.table.table-hover.table-bordered
+        table#indexTable
             thead
                 tr
                     th 编号
@@ -12,7 +12,7 @@ block content
                     th 内容
                     th 责任人
                     //- th 查看
-                    //- th 操作
+                    th 操作
                 tbody
                     each item in projects
                         //- 未完成
@@ -21,7 +21,7 @@ block content
                                 td #{item.pid}
                                 if moment(item.start).format('ww') === moment(Date.now()).format('ww')
                                     td.text-muted open
-                                else if moment(item.deadline).format('ww') < moment(Date.now()).format('ww')
+                                else if moment(item.deadline).format('YYYY/MM/DD') < moment(Date.now()).format('YYYY/MM/DD')
                                     td.text-danger pending
                                 else
                                     td.text-primary going 
@@ -29,6 +29,12 @@ block content
                                 td #{moment(item.deadline).format('YYYY/MM/DD')}
                                 td #{item.description}
                                 td #{item.responser.nickname}
+                                td
+                                    if user
+                                        if user._id == item.responser._id || user.role == 50
+                                            a.del(href="#"): span.glyphicon.glyphicon-remove(data-id="#{item._id}" data-week="#{moment(item.start).format('ww')}" aria-hidden="true")
+                                            span &nbsp;|&nbsp;
+                                            a(href="/user/project/#{item._id}"): span.glyphicon.glyphicon-pencil(aria-hidden="true")
                         else
                             tr(class='item-id-#{item._id} success')
                                 td #{item.pid}

@@ -4,9 +4,9 @@ block content
         .row
             form.form-horizontal(method="post", action="/user/project", enctype="multipart/form-data")
                 if project._id
-                    input(type="hidden", name="project[_id]", value=project._id)
+                    input.hidden(name="project[_id]", value=project._id)
                 if user
-                    input(type="hidden", name="project[responser]", value=user._id)
+                    input.hidden(name="project[responser]", value=user._id)
                 .form-group
                     label.col-sm-2.control-label(for="inputName") 项目名字
                     .col-sm-10
