@@ -21,12 +21,12 @@
     "tests"
   ],
   "dependencies": {
-    "bootstrap": "^3.3.7",
     "fullcalendar": "^3.4.0",
-    "jquery": "^3.2.1",
     "flatpickr": "flatpickr-calendar#^2.6.3",
     "bootstrap-table": "^1.11.1",
     "tableexport.jquery.plugin": "^1.9.3",
-    "js-xlsx": "^0.10.9"
+    "js-xlsx": "^0.10.9",
+    "bootstrap": "^3.3.7",
+    "jquery": "^3.2.1"
   }
 }
