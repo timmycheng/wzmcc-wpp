@@ -36,4 +36,40 @@ $(function(){
             }
         })
     })
+
+    // $('#modalSignup').bootstrapValidator({
+    //     feedbackIcons: {
+    //         valid: 'glyphicon glyphicon-ok',
+    //         invalid: 'glyphicon glyphicon-remove',
+    //         validating: 'glyphicon glyphicon-refresh',
+    //     },
+    //     // live: 'enabled',
+    //     message: '请输入值',
+    //     fields: {
+    //         signupUsername: {
+    //             selector: '#signupUsername',
+    //             validators: {
+    //                 notEmpty: {
+    //                     message: '必须为非空',
+    //                 },
+    //             },
+    //         },
+    //         signupNickname: {
+    //             validators: {
+    //                 notEmpty: {},
+    //             },
+    //         },
+    //         signupPassword: {
+    //             validators: {
+    //                 notEmpty: {},
+    //                 stringLength: {
+    //                     min: 6,
+    //                     max: 30,
+    //                 },
+    //             },
+    //         },
+    //     },
+    // })
+
+        
 })

@@ -27,6 +27,7 @@
     "tableexport.jquery.plugin": "^1.9.3",
     "js-xlsx": "^0.10.9",
     "bootstrap": "^3.3.7",
-    "jquery": "^3.2.1"
+    "jquery": "^3.2.1",
+    "bootstrapvalidator": "^0.5.3"
   }
 }
