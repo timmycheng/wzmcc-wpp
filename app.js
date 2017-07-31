@@ -18,7 +18,7 @@ mongoose.Promise = global.Promise
 mongoose.connect(mongoUrl, {useMongoClient: true})
 
 app.set('views', './app/views/pages')
-app.set('view engine', 'jade')
+app.set('view engine', 'pug')
 app.use(bodyParser.json())
 
 app.use(cookieParser())

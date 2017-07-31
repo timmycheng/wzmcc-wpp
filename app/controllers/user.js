@@ -47,7 +47,7 @@ exports.list = function(req,res){
 			console.log(err)
 		}
 		res.render('userlist',{
-			title:'imooc 用户列表页',
+			title:'用户列表',
 			users:users
 		})
 	})	
@@ -116,7 +116,7 @@ exports.adminRequired = function(req,res,next){
 	console.log(req.session.user)
 	if(user.role <= 10 ){
 		// req.method = 'GET'
-		return res.redirect('/signin')
+		return res.redirect('/')
 	}
 	next()
 		
