@@ -17,6 +17,7 @@ $(function(){
         exportTypes: ['xlsx','excel'],
         
     })
+    
     $('.del').click(function(e){
         var target = $(e.target)
         var id = target.data('id')

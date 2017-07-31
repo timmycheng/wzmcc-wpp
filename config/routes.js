@@ -37,6 +37,7 @@ module.exports = function(app){
     app.get('/admin/user/list', User.signinRequired ,User.adminRequired ,User.list)
     
     app.get('/user/project/new', User.signinRequired, Project.new)
+    app.get('/user/project/list', User.signinRequired, Project.listJSON)
     app.get('/user/project/:id', User.signinRequired, Project.detail)
     app.post('/user/project', User.signinRequired, Project.saveAndUpdate)
     app.delete('/user/project',User.signinRequired, Project.del)

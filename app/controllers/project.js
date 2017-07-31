@@ -11,7 +11,7 @@ var path =require("path")
 exports.new = function(req, res){
     res.render('project', {
         title: '新增项目',
-        project: {}
+        project: {start: Date.now()}
     })
 }
 
@@ -27,7 +27,7 @@ exports.saveAndUpdate = function(req, res){
     // console.log(_project)
     if(id){
         // console.log(projectObj)
-        console.log('update')
+        // console.log('update')
         Project.findById(id, function(err, project){
             if(err){
                 console.log(err)
@@ -41,7 +41,7 @@ exports.saveAndUpdate = function(req, res){
             })
         })
     }else{
-        console.log('save')
+        // console.log('save')
         Week.findOneAndUpdate(
             {weeknumber: w}, 
             {$inc: {count: 1}}, 
@@ -73,7 +73,7 @@ exports.saveAndUpdate = function(req, res){
 exports.del = function(req, res){
     var id = req.query.id
     var week = req.query.week
-    console.log(id)
+    // console.log(id)
     if (id) {
         Project.remove({_id: id}, function(err){
             if(err){
@@ -98,6 +98,7 @@ exports.list = function(req, res, next){
     Project
         .find({})
         .populate('responser', 'nickname')
+        .sort('deadline meta.updateAt')
         .exec(function(err, projects){
             if(err){
                 console.log(err)
@@ -107,12 +108,25 @@ exports.list = function(req, res, next){
         })
 }
 
+exports.listJSON = function(req, res){
+    Project
+        .find({})
+        .populate('responser', 'nickname')
+        .exec(function(err, projects){
+            if(err){
+                console.log(err)
+            }
+            res.send(projects)
+        })
+}
+
 exports.detail = function(req, res){
     var id = req.params.id
-    console.log(id)
+    // console.log(id)
     if(id) {
         Project
             .findById({_id: id}, function(err, project){
+                // console.log(project)
                 if(err){
                     console.log(err)
                 }
