@@ -35,12 +35,13 @@ module.exports = function(app){
 	app.get('/signup', User.showSignup)
 	app.get('/logout', User.logout)
     app.get('/admin/user/list', User.signinRequired ,User.adminRequired ,User.list)
+    app.delete('/admin/user/list', User.adminRequired, User.del)
     
     app.get('/user/project/new', User.signinRequired, Project.new)
     app.get('/user/project/list', User.signinRequired, Project.listJSON)
     app.get('/user/project/:id', User.signinRequired, Project.detail)
     app.post('/user/project', User.signinRequired, Project.saveAndUpdate)
-    app.delete('/user/project',User.signinRequired, Project.del)
+    app.delete('/user/project', User.signinRequired, Project.del)
     
 
 }

@@ -15,7 +15,7 @@ exports.signup = function(req,res){
 			return res.redirect('/signin')//已注册的用户在注册时候重定向到登录页面
 		}else{
 			var user  = new User(_user)
-			console.log(user)
+			// console.log(user)
 			user.save(function(err,user){
 				if(err){
 					console.log(err)
@@ -97,13 +97,27 @@ exports.logout = function(req, res){
 	res.redirect('/')
 }
 
+exports.del = function(req, res){
+	var id = req.query.id
+    // console.log(id)
+    if (id) {
+        User.remove({_id: id}, function(err){
+            if(err){
+                console.log(err)
+            }else{
+				res.json({success: 1})
+            }
+        })
+    }
+}
+
 
 //midware for user
 exports.signinRequired = function(req,res,next){
 	var user = req.session.user
 	if(!user){
-		req.method = 'GET'
-		console.log(req.method)
+		// req.method = 'GET'
+		// console.log(req.method)
 		return res.redirect('/signin')
 		// return res.render('index')
 	}
@@ -113,7 +127,7 @@ exports.signinRequired = function(req,res,next){
 
 exports.adminRequired = function(req,res,next){
 	var user = req.session.user
-	console.log(req.session.user)
+	// console.log(req.session.user)
 	if(user.role <= 10 ){
 		// req.method = 'GET'
 		return res.redirect('/')
