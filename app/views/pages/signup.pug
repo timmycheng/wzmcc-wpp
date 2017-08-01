@@ -4,7 +4,7 @@ block content
 	.container
 		.row
 			.col-md-5
-				form(method="POST",action="/user/signup")
+				form#signup(method="POST",action="/user/signup")
 					.modal-body
 						.form-group
 							label(for="signupUserame") 用户名
@@ -18,3 +18,4 @@ block content
 					.modal-footer
 						button.btn.btn-default(type="button",data-dismiss="modal") 关闭
 						button.btn.btn-success(type="submit") 提交
+	script(src="js/signinup.js")
