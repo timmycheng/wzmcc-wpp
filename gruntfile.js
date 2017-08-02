@@ -9,8 +9,14 @@ module.exports = function(grunt){
             //     }
             // },
             js: {
-                files: ['public/js/**', 'models/**/*.js', 'schemas/**/**.js'],
+                files: ['public/js/**', 'app/models/**/*.js', 'app/schemas/**/**.js'],
                 // task: ['jshint'],
+                options: {
+                    livereload: true,
+                }
+            },
+            pug: {
+                files: ['app/views/**/*.pug'],
                 options: {
                     livereload: true,
                 }
@@ -34,7 +40,21 @@ module.exports = function(grunt){
                 }
             }
         },
+        browserSync: {
+            dev: {
+                bsFiles: {
+                    src: [
+                        '**'
+                    ]
+                },
+                options: {
+                    watchTask: true,
+                    server: './app'
+                }
+            }
+        },
         concurrent: {
+            // task: ['browserSync', 'watch', 'nodemon'],
             task: ['nodemon', 'watch'],
             options: {
                 logConcurrentOutput: true,
@@ -44,6 +64,7 @@ module.exports = function(grunt){
     grunt.loadNpmTasks('grunt-contrib-watch')
     grunt.loadNpmTasks('grunt-contrib-nodemon')
     grunt.loadNpmTasks('grunt-concurrent')
+    // grunt.loadNpmTasks('grunt-browser-sync')
 
     grunt.option('force', true)
     grunt.registerTask('default', ['concurrent'])

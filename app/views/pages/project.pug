@@ -2,39 +2,46 @@ extends ../layout
 block content
     .container
         .row
-            form.form-horizontal(method="post", action="/user/project", enctype="multipart/form-data")
-                if project._id
-                    input.hidden(name="project[_id]", value=project._id)
-                if user
-                    input.hidden(name="project[responser]", value=user._id)
-                .form-group
-                    label.col-sm-2.control-label(for="inputName") 项目名称
-                    .col-sm-10
-                        input#inputName.form-control(type="text",name="project[name]",value=project.name)
-                .form-group
-                    label.col-sm-2.control-label(for="inputStatus") 状态
-                    .col-sm-10
-                        select#inputStatus.form-control(name="project[status]")
-                            if project.status
-                                option(value='0') 未完成
-                                option(value='1' selected) 已完成
-                            else
-                                option(value='0' selected) 未完成
-                                option(value='1') 已完成
-                .form-group
-                    label.col-sm-2.control-label(for="inputStart") 开始日期
-                    .col-sm-10
-                        input#inputStart.form-control(type="text", name="project[start]", value=moment(project.start).format('YYYY/MM/DD'))
-                .form-group
-                    label.col-sm-2.control-label(for="inputDeadline") 截止日期
-                    .col-sm-10
-                        input#inputDeadline.form-control(type="text", name="project[deadline]", value=moment(project.deadline).format('YYYY/MM/DD'))
-                .form-group
-                    label.col-sm-2.control-label(for="inputDescription") 项目说明
-                    .col-sm-10
-                        input#inputDescription.form-control(type="text",name="project[description]",value=project.description)
-                .form-group
-                    .col-sm-offset-2.col-sm-10
-                    button.btn.btn-default(type="submit") 录入
-                hr
+            if project.comments
+                .col-md-6
+            else
+                .col-md-6.col-md-offset-3
+                    form.form-horizontal(method="post", action="/user/project", enctype="multipart/form-data")
+                        if project._id
+                            input.hidden(name="project[_id]", value=project._id)
+                        if user
+                            input.hidden(name="project[responser]", value=user._id)
+                        .form-group
+                            label.col-sm-2.control-label(for="inputName") 项目名称
+                            .col-sm-10
+                                input#inputName.form-control(type="text",name="project[name]",value=project.name)
+                        .form-group
+                            label.col-sm-2.control-label(for="inputStatus") 状态
+                            .col-sm-10
+                                select#inputStatus.form-control(name="project[status]")
+                                    if project.status
+                                        option(value='0') 未完成
+                                        option(value='1' selected) 已完成
+                                    else
+                                        option(value='0' selected) 未完成
+                                        option(value='1') 已完成
+                        .form-group
+                            label.col-sm-2.control-label(for="inputStart") 开始日期
+                            .col-sm-10
+                                input#inputStart.form-control(type="text", name="project[start]", value=moment(project.start).format('YYYY/MM/DD'))
+                        .form-group
+                            label.col-sm-2.control-label(for="inputDeadline") 截止日期
+                            .col-sm-10
+                                input#inputDeadline.form-control(type="text", name="project[deadline]", value=moment(project.deadline).format('YYYY/MM/DD'))
+                        .form-group
+                            label.col-sm-2.control-label(for="inputDescription") 项目说明
+                            .col-sm-10
+                                //- textarea#inputDescription.form-control(rows="5" name="project[description]") #{project.description}
+                                input#inputDescription.form-control(type="type" name="project[description]" value=project.description)
+                        .form-group
+                            .col-sm-offset-2.col-sm-10
+                            button.btn.btn-default(type="submit") 录入
+            //- .col-md-6
+                
+        hr
     script(src='/js/project.js')

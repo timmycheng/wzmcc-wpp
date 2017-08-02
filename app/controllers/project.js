@@ -126,7 +126,7 @@ exports.detail = function(req, res){
     if(id) {
         Project
             .findById({_id: id}, function(err, project){
-                // console.log(project)
+                console.log(project)
                 if(err){
                     console.log(err)
                 }
