@@ -1,7 +1,7 @@
 var Project = require('../models/project')
 var Week = require('../models/week')
 // var Catetory = require('../models/catetory')
-// var Comment = require('../models/comment')
+var Comment = require('../models/comment')
 var moment = require('moment')
 var _ = require('underscore')
 
@@ -86,9 +86,14 @@ exports.del = function(req, res){
                         if(err){
                             console.log(err)
                         }
-                        res.json({success: 1})
                     }
                 )
+                Comment.remove({project: id}, function(err){
+                    if(err){
+                        console.log(err)
+                    }
+                })
+                res.json({success: 1})
             }
         })
     }
@@ -97,7 +102,7 @@ exports.del = function(req, res){
 exports.list = function(req, res, next){
     Project
         .find({})
-        .populate('responser', 'nickname')
+        .populate('responser latest', 'nickname content meta')
         .sort('deadline meta.updateAt')
         .exec(function(err, projects){
             if(err){
@@ -111,7 +116,7 @@ exports.list = function(req, res, next){
 exports.listJSON = function(req, res){
     Project
         .find({})
-        .populate('responser', 'nickname')
+        .populate('responser latest', 'nickname content meta')
         .exec(function(err, projects){
             if(err){
                 console.log(err)
@@ -126,14 +131,29 @@ exports.detail = function(req, res){
     if(id) {
         Project
             .findById({_id: id}, function(err, project){
-                console.log(project)
+                // console.log(project)
                 if(err){
                     console.log(err)
+                }else{
+                    var pid = project._id
+                    Comment
+                        .find({project: project._id})
+                        .populate('from to', 'nickname')
+                        .sort('createAt')
+                        .exec(function(err, comments){
+                            if(err){
+                                console.log(err)
+                            }
+                            project.comments = comments
+                            // console.log(project)
+                            console.log(project.comments)
+                            res.render('project', {
+                                title: project.name,
+                                project: project,
+                            })
+                        })
                 }
-                res.render('project', {
-                    title: project.name,
-                    project: project,
-                })
+                // console.log(project._id)
             })
     }
 }

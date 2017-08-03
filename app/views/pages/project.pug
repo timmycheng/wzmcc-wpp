@@ -2,10 +2,11 @@ extends ../layout
 block content
     .container
         .row
-            if project.comments
+            //- if project.comments
                 .col-md-6
-            else
-                .col-md-6.col-md-offset-3
+            //- else
+            //-     .col-md-6.col-md-offset-3
+            .col-md-6
                     form.form-horizontal(method="post", action="/user/project", enctype="multipart/form-data")
                         if project._id
                             input.hidden(name="project[_id]", value=project._id)
@@ -41,7 +42,24 @@ block content
                         .form-group
                             .col-sm-offset-2.col-sm-10
                             button.btn.btn-default(type="submit") 录入
-            //- .col-md-6
+            .col-md-6
+                if project.comments
+                    for item in project.comments
+                        .comment-group
+                            - var t = moment(item.meta.createAt).format('YYYY/MM/DD HH:mm:DD')
+                            .col-md-12: h5= t + ' - ' + item.from.nickname + ':'
+                            .col-md-12: h4= item.content 
+
+                hr
+                if project._id
+                    form#newCommentForm.form-horizontal(method='POST', action='/user/project/comment', enctype='multipart/form-data')
+                        input.hidden(name='comment[project]', value=project._id)
+                        input.hidden(name='comment[from]', value=user._id)
+                        .form-group
+                            .col-sm-12: label.control-label(for="textareaComment") 评论/进展
+                            textarea#textareaComment.form-control(name="comment[content]", cols="30", rows="5")
+                        .form-group
+                            button.btn.btn-default(type="submit") 录入
                 
         hr
     script(src='/js/project.js')

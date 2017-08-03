@@ -11,4 +11,18 @@ $(function(){
         "weekNumbers": true,
         "dateFormat": 'Y/m/d',
     })
+    // $('#newCommentForm').submit(function(e){
+    //     console.log(e)
+    //     e.preventDefault()
+    //     // alert('in')
+    //     $.ajax({
+    //         url: '/user/project/comment',
+    //         type: 'POST',
+    //         data: e,
+    //     }).done(function(result){
+    //         if(result.success == 1){
+    //             alert('save in')
+    //         }
+    //     })
+    // })
 })

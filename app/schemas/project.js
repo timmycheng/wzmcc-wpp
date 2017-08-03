@@ -20,7 +20,11 @@ var ProjectSchema = new Schema({
 	responser: {
         type: ObjectId,
         ref: 'User',
-    },
+	},
+	latest: {
+		type: ObjectId,
+		ref: 'Comment',
+	},
 	meta:{
 		createAt:{
 			type:Date,

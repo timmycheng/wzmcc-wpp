@@ -27,7 +27,14 @@ block content
                                     td.text-primary going 
                                 td #{item.name}
                                 td #{moment(item.deadline).format('YYYY/MM/DD')}
-                                td #{item.description}
+                                td
+                                    p #{item.description}
+                                    if item.latest
+                                        - var w = moment(Date.now()).format('w')
+                                        if moment(item.latest.meta.createAt).format('w') === w
+                                            p.text-success &nbsp;&nbsp;&nbsp;&nbsp; -- #{item.latest.content}
+                                        else
+                                            p.text-danger &nbsp;&nbsp;&nbsp;&nbsp; -- #{item.latest.content}
                                 td #{item.responser.nickname}
                                 td(data-tableexport-display='none')
                                     if user

@@ -1,6 +1,7 @@
 var Index = require('../app/controllers/index')
 var User = require('../app/controllers/user')
 var Project = require('../app/controllers/project')
+var Comment = require('../app/controllers/comment')
 
 // var moment = require('moment')
 // routes
@@ -41,6 +42,7 @@ module.exports = function(app){
     app.get('/user/project/list', User.signinRequired, Project.listJSON)
     app.get('/user/project/:id', User.signinRequired, Project.detail)
     app.post('/user/project', User.signinRequired, Project.saveAndUpdate)
+    app.post('/user/project/comment', User.signinRequired, Comment.save)
     app.delete('/user/project', User.signinRequired, Project.del)
     
 
