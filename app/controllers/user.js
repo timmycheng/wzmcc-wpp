@@ -116,10 +116,7 @@ exports.del = function(req, res){
 exports.signinRequired = function(req,res,next){
 	var user = req.session.user
 	if(!user){
-		// req.method = 'GET'
-		// console.log(req.method)
 		return res.redirect('/signin')
-		// return res.render('index')
 	}
 	next()
 		
@@ -127,9 +124,7 @@ exports.signinRequired = function(req,res,next){
 
 exports.adminRequired = function(req,res,next){
 	var user = req.session.user
-	// console.log(req.session.user)
 	if(user.role <= 10 ){
-		// req.method = 'GET'
 		return res.redirect('/')
 	}
 	next()

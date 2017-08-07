@@ -1,0 +1,14 @@
+extends ../layout
+block content
+	.container
+		.row
+			.col-md-5
+				form#signin(method="POST",action="/user/signin")
+					.form-group
+						label(for="signinUsername" control-label) 用户名
+						input#signinUsername.form-control(name="user[username]",type="text")
+					.form-group
+						label(for="signinPassword" control-label) 密码
+						input#signinPassword.form-control(name="user[password]",type="password")
+					button.btn.btn-success(type="submit") 提交		
+	script(src="js/signinup.js")

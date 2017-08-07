@@ -5,6 +5,7 @@ $(function(){
             invalid: 'glyphicon glyphicon-remove',
             validating: 'glyphicon glyphicon-refresh'
         },
+        container: '.alert',
         message: '请输入值',
         fields: {
             'user[username]': {

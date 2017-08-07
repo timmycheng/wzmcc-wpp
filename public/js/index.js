@@ -8,6 +8,8 @@ $(function(){
     // alert('/')
     $('#indexTable').bootstrapTable({
         // columns: 
+        url: '/user/project/list',
+        dataType: 'json',
         pagination: true,
         paginationLoop: true,
         showRefresh: true,
@@ -17,6 +19,10 @@ $(function(){
         exportTypes: ['xlsx','excel'],
         
     })
+
+    function statusFormat(value, row){
+        return value===1? 'close':'open'
+    }
     
     $('.del').click(function(e){
         var target = $(e.target)

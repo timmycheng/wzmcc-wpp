@@ -1,14 +1,36 @@
-extends ../layout
-block content
-	.container
-		.row
-			.col-md-5
-				form#signin(method="POST",action="/user/signin")
-					.form-group
-						label(for="signinUsername" control-label) 用户名
-						input#signinUsername.form-control(name="user[username]",type="text")
-					.form-group
-						label(for="signinPassword" control-label) 密码
-						input#signinPassword.form-control(name="user[password]",type="password")
-					button.btn.btn-success(type="submit") 提交		
-	script(src="js/signinup.js")
+doctype
+html
+    head
+        head(charset="utf-8")
+        title wzmcc-wpp
+        include ../includes/head
+    body
+        .container
+            .row
+                .row
+                    .col-md-12.center.login-header
+                        h2 WZMCC-WPP
+                .row
+                    .well.col-md-5.center.login-box
+                        .alert.alert-info
+                            span 请输入账号和密码
+                        form#signin.form-horizontal(action="/user/signin",method="POST")
+                            //- .form-group
+                                label.sr-only(for="signinUsername" control-label) 用户名
+                            .input-group.input-group-lg
+                                .input-group-addon: i.glyphicon.glyphicon-user.red
+                                input#signinUsername.form-control(name="user[username]", type="text", placeholder="用户名")
+                            //- .clear-fix
+                            br
+                            //- .form-group
+                                label.sr-only(for="signinPassword" control-label) 密码
+                            .input-group.input-group-lg
+                                .input-group-addon: i.glyphicon.glyphicon-lock.red
+                                input#signinPassword.form-control(name="user[password]",type="password", placeholder="密码")
+                            //- .clear-fix
+                            //- br
+                            p.center.col-md-5
+                                button.btn.btn-primary(type="submit") 登陆
+                                //- button.btn.btn-success(href="/signup") 注册
+
+    script(src="js/signinup.js")

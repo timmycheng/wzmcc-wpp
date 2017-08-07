@@ -1,58 +1,36 @@
 .container
-    .row
-        .page-header.clearfix
-            h1 #{title}
-.navbar.navbar-default.navbar-fixed-bottom
-    .container
-        .navbar-header
-            a.navbar-brand(href="/") WZMCC－WPP
-        if user
-            p.navbar-text.navbar-left
-                a.navbar-link(href="/user/project/new") 新建项目
-                if user.role > 10
-                    span &nbsp;|&nbsp;
-                    a.navbar-link(href="/admin/user/list") 用户列表
-            p.navbar-text.navbar-right
-                span 欢迎您，#{user.nickname}
-                span &nbsp;|&nbsp;
-                a.navbar-link(href="/logout") 登出
-
-        else
-            p.navbar-text.navbar-right
-                a.navbar-link(href="#",data-toggle="modal",data-target="#signupModal") 注册
-                span &nbsp;|&nbsp;
-                a.navbar-link(href="#",data-toggle="modal",data-target="#signinModal") 登录
-
-#signupModal.modal.fade
-    .modal-dialog
-        .modal-content
-            form#modalSignup(method="POST",action="/user/signup")
-                .modal-header 注册
-                .modal-body
-                    .form-group
-                        label(for="signupUsername") 用户名
-                        input#signupUsername.form-control(name="user[username]",type="text")
-                    .form-group
-                        label(for="signupNickname") 昵称
-                        input#signupNickname.form-control(name="user[nickname]",type="text")
-                    .form-group
-                        label(for="signupPassword") 密码
-                        input#signupPassword.form-control(name="user[password]",type="password")
-                .modal-footer
-                    button.btn.btn-default(type="button",data-dismiss="modal") 关闭
-                    button.btn.btn-success(type="submit") 提交
-#signinModal.modal.fade
-    .modal-dialog
-        .modal-content
-            form#modalSignin(method="POST",action="/user/signin")       
-                .modal-header 登录
-                .modal-body
-                    .form-group
-                        label(for="signinUserame") 用户名
-                        input#signinUserame.form-control(name="user[username]",type="text")
-                    .form-group
-                        label(for="signinPassword") 密码
-                        input#signinPassword.form-control(name="user[password]",type="password")
-                .modal-footer
-                    button.btn.btn-default(type="button",data-dismiss="modal") 关闭
-                    button.btn.btn-success(type="submit") 提交
+.navbar.navbar-default(role="navigation")
+    .navbar-inner
+        button.navbar-toggle.pull-left.animated.flip(type="button")
+            span.sr-only Toggle navigation
+            span.icon-bar
+            span.icon-bar
+            span.icon-bar
+        a.navbar-brand(href="/"): span WZMCC-WPP
+        if typeof(user) !== 'undefined'
+            .btn-group.pull-right
+                button.btn.btn-default.dropdown-toggle(data-toggle="dropdown")
+                    i.glyphicon.glyphicon-user
+                    span.hidden-sm.hidden-xs #{user.nickname}
+                    //- span.hidden-sm.hidden-xs nickname
+                    span.caret
+                ul.dropdown-menu
+                    li: a(href="#") 个人中心
+                    li: a(href="/logout") 登出
+            //- else
+            //-     button.btn.btn-default.navbar-btn(type="button", href='/signin')
+            //-         i.glyphicon.glyphicon-flash
+            //-         span.hidden-sm.hidden-xs 登陆
+            //-     button.btn.btn-default.navbar-btn(type="button", href="/signup")
+            //-         i.glyphicon.glyphicon-pencil
+            //-         span.hidden-sm.hidden-xs 注册
+        //- if user
+        if typeof(user) !== 'undefined'
+            ul.collapse.navbar-collapse.nav.navbar-nav.top-menu
+                li: a(href="/user/project/new")
+                    i.glyphicon.glyphicon-edit
+                    span 新建项目
+                if user.role >= 50
+                    li: a(href="#")
+                        i.glyphicon.glyphicon-user
+                        span 用户列表

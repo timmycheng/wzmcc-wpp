@@ -16,6 +16,7 @@ module.exports = function(app){
     // session
     app.use(function(req, res, next){
         var _user = req.session.user
+        console.log(_user)
         app.locals.user = _user
         next()
     })
@@ -23,12 +24,13 @@ module.exports = function(app){
     // debug
     app.use(function(req, res, next){
         var date = app.locals.moment(Date.now()).format('hh:mm:ss')
-        console.log(date, req.method, req.originalUrl)
+        console.log(date, req.ip, req.method, req.originalUrl)
         next()
     })
+    
 
-    // app.get('/', Index.index)
-    app.get('/', Project.list, Index.newInd)
+    app.get('/', User.signinRequired, Index.index)
+    // app.get('/', Project.list, Index.newInd)
 
     app.post('/user/signup', User.signup)
 	app.post('/user/signin', User.signin)
